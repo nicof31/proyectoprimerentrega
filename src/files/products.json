@@ -1,0 +1,55 @@
+[
+	{
+		"title": "prueba put- 3",
+		"description": "modificado put ---3",
+		"code": "a",
+		"price": 1050,
+		"status": true,
+		"category": "notebooks",
+		"thumbnail": [
+			"modificado put 279",
+			"modificado put 2799"
+		],
+		"stock": 1,
+		"id": 1
+	},
+	{
+		"title": "Producto modificado nico PATCH 2 v4",
+		"description": "modificado nico PATCH 2 v4",
+		"code": "f",
+		"price": 1050,
+		"status": true,
+		"category": "notebooks",
+		"thumbnail": [
+			"modificado put 279",
+			"modificado put 2799"
+		],
+		"stock": 1,
+		"id": 2
+	},
+	{
+		"title": "prueba put- 3",
+		"description": "modificado put ---3",
+		"code": "c",
+		"price": 1050,
+		"status": true,
+		"category": "notebooks",
+		"thumbnail": [
+			"modificado put 279",
+			"modificado put 2799"
+		],
+		"stock": 1,
+		"id": 3
+	},
+	{
+		"title": "prueba put- 4",
+		"description": "modificado put ---4",
+		"code": "d",
+		"price": 1050,
+		"status": true,
+		"category": "notebooks",
+		"thumbnail": [],
+		"stock": 1,
+		"id": 4
+	}
+]
