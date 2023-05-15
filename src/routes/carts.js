@@ -1,11 +1,11 @@
 import productManager from "../components/productManager.js";
-const productList = new productManager("./files/products.json");
+const productList = new productManager("src/files/products.json");
 
 import cartsManager from "../components/cartsmanager.js";
 import { Router } from "express";
 
 const routerCarts = Router();
-const cartList = new cartsManager("./files/carts.json");
+const cartList = new cartsManager("src/files/carts.json");
 
 //---------------------GET---------------------
 routerCarts.get("/api/carts", async (req, res) => {

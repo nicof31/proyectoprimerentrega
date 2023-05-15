@@ -4,7 +4,7 @@ import productManager from "../components/productManager.js"
 import { Router } from "express";
 
 const routerProdructs = Router();
-const productList = new productManager("./files/products.json");
+const productList = new productManager("src/files/products.json");
 
 
 //http://localhost:8080
