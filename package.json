@@ -1,6 +1,6 @@
 {
-  "name": "desafioentregabletres",
-  "version": "1.0.1",
+  "name": "proyectoprimeraentrega",
+  "version": "1.0.2",
   "description": "Servidor Express",
   "type":"module",
   "main": "app.js",

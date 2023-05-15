@@ -40,16 +40,5 @@
 		],
 		"stock": 1,
 		"id": 3
-	},
-	{
-		"title": "prueba put- 4",
-		"description": "modificado put ---4",
-		"code": "d",
-		"price": 1050,
-		"status": true,
-		"category": "notebooks",
-		"thumbnail": [],
-		"stock": 1,
-		"id": 4
 	}
 ]
