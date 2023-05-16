@@ -12,12 +12,14 @@ app.listen(PUERTO, () => {
   console.log(`El servidor esta escuchando en el puerto ${PUERTO}...`);
 });
 
-//para interpretar mejor los datos de las query?
+//para interpretar mejor los datos de las query
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 //carpeta PUBLIC
-app.use(express.static('public'));
+//app.use(express.static('src/public'));
+app.use('/static', express.static('src/public'))
+
 
 //Use Route
 app.use('/', prodRouter);

@@ -20,7 +20,7 @@ routerCarts.get("/api/carts", async (req, res) => {
   }
 });
 
-//---------------------POST ADD CARTS---------------------
+//---------------------POST ADD CARTS / INCREMENT QUANTITY---------------------
 routerCarts.post("/api/crearcarts/:cid/products/:pid", async (req, res) => {
   const idCart = req.params.cid;
   const idCartEn = Number(req.params.cid);
@@ -31,7 +31,7 @@ routerCarts.post("/api/crearcarts/:cid/products/:pid", async (req, res) => {
   const searchIdCart = cartSearch.find(({ id }) => id == idCart);
 
   //busco id en products.json
-  const findCartIdProduct = await productList.Products();
+  const findCartIdProduct = await productList.products();
   const idFindCartProduct = findCartIdProduct.find(
     ({ id }) => id == idProductsCart
   );
@@ -73,7 +73,7 @@ routerCarts.post("/api/crearcarts/:cid/products/:pid", async (req, res) => {
   }
 });
 
-//---------------------POST DELETE QUANTITY CARTS---------------------
+//---------------------POST DISCONUNT QUANTITY CARTS---------------------
 
 routerCarts.post(
   "/api/deletequantitycarts/:cid/products/:pid",

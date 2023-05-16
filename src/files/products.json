@@ -16,7 +16,7 @@
 	{
 		"title": "Producto modificado nico PATCH 2 v4",
 		"description": "modificado nico PATCH 2 v4",
-		"code": "f",
+		"code": "d",
 		"price": 1050,
 		"status": true,
 		"category": "notebooks",
@@ -40,5 +40,55 @@
 		],
 		"stock": 1,
 		"id": 3
+	},
+	{
+		"title": "prueba put-",
+		"description": "modificado put ---",
+		"code": "#prueba nuevo o44b",
+		"price": 100,
+		"status": true,
+		"category": "notebooks",
+		"thumbnail": [
+			"modificado put",
+			"modificado put 2"
+		],
+		"stock": 1,
+		"id": 5
+	},
+	{
+		"title": "prueba put-",
+		"description": "modificado put ---",
+		"code": "#prueba nuevo 776",
+		"price": 100,
+		"status": true,
+		"category": "notebooks",
+		"thumbnail": [],
+		"stock": 1,
+		"id": 6
+	},
+	{
+		"title": "prueba put-",
+		"description": "modificado put ---",
+		"code": "#prueba nuevo 4444b",
+		"price": 100,
+		"status": true,
+		"category": "notebooks",
+		"thumbnail": [
+			"modificado put",
+			"modificado put 2"
+		],
+		"stock": 1,
+		"id": 7
+	},
+	{
+		"title": "prueba put-",
+		"description": "modificado put ---",
+		"code": "#prueba nuevo 77776",
+		"price": 100,
+		"status": true,
+		"category": "notebooks",
+		"thumbnail": [],
+		"stock": 1,
+		"id": 8
 	}
 ]

@@ -16,7 +16,7 @@ routerProdructs.get("/", async (req, res) => {
    //---------------------GET---------------------
   
   routerProdructs.get("/api/products", async (req, res) => {
-    const filterLimit = await productList.Products();    
+    const filterLimit = await productList.products();    
      if (req.query.limit) {
        const productsFilter = filterLimit.slice(0, req.query.limit);
        return res.status(200).send({status:"success", message: { productsFilter }});
@@ -30,7 +30,7 @@ routerProdructs.get("/", async (req, res) => {
   routerProdructs.get("/api/products/:pid", async (req, res) => {
     const idProducts = req.params.pid;
     console.log(idProducts);
-    const busquedaIdProd = await productList.ProductById(idProducts);
+    const busquedaIdProd = await productList.productById(idProducts);
     if (!busquedaIdProd) {
       return res.status(409).send({status:"error",message: "Este id buscado no existe, cargue un nuevo id"});
     }
@@ -44,7 +44,7 @@ routerProdructs.get("/", async (req, res) => {
     if (!crearProducto.title || !crearProducto.description || !crearProducto.code || !crearProducto.price || !crearProducto.status || !crearProducto.category || !crearProducto.stock) {
       return res.status(400).send({status:"error",message:"Incomplete values"});
     } 
-    const findCode = await productList.Products();
+    const findCode = await productList.products();
     const codeVerf = findCode.find(({ code })=> code == crearProducto.code);
     console.log(codeVerf);
     if (codeVerf != null) {
@@ -65,7 +65,7 @@ routerProdructs.get("/", async (req, res) => {
     if (!actualizarProducto.title || !actualizarProducto.description || !actualizarProducto.code || !actualizarProducto.price || !actualizarProducto.status || !actualizarProducto.category || !actualizarProducto.stock) {
       return res.status(400).send({status:"error",message:"Incomplete values"});
     };
-    const findCodeUpC = await productList.Products();
+    const findCodeUpC = await productList.products();
     const idFindUpdate = findCodeUpC.find(({ id })=> id == idUpdate);
     //console.log(JSON.stringify(idfindUpdate));
     const filterId = findCodeUpC.filter( id => id !== idFindUpdate);
@@ -89,7 +89,7 @@ routerProdructs.get("/", async (req, res) => {
         passThumbnail = JSON.parse(readThumbnail) ; 
         //console.log("pass else if" + passThumbnail);
       };          
-        await productList.UpdateProduct(idUpdate, actualizarProducto.title, actualizarProducto.description, actualizarProducto.code, actualizarProducto.price, actualizarProducto.status, actualizarProducto.category, passThumbnail ,actualizarProducto.stock);
+        await productList.updateProduct(idUpdate, actualizarProducto.title, actualizarProducto.description, actualizarProducto.code, actualizarProducto.price, actualizarProducto.status, actualizarProducto.category, passThumbnail ,actualizarProducto.stock);
         return res.status(200).send({status:"success, Products actualizado en base",message:{ actualizarProducto }}); 
       };
     }
@@ -102,7 +102,7 @@ routerProdructs.get("/", async (req, res) => {
       const idUpdatePatch = req.params.pid;
       //console.log(updateParamPatch);
         
-      const findCodeUpdatePatch = await productList.Products();
+      const findCodeUpdatePatch = await productList.products();
       const idVerfUpdatePatch = findCodeUpdatePatch.find(({ id })=> id == idUpdatePatch);
       //console.log(idVerfUpdatePatch);
 
@@ -117,7 +117,7 @@ routerProdructs.get("/", async (req, res) => {
         } else {
         const newObjUpdate = Object.assign(idVerfUpdatePatch,updateParamPatch);
         //console.log (newObjUpdate);
-        await productList.UpdateParam(newObjUpdate);
+        await productList.updateParam(newObjUpdate);
         return res.status(200).send({status:"success, el producto existe en base y se puede cambiar los parametros",message: { newObjUpdate }});
         }
       } else {
@@ -131,7 +131,7 @@ routerProdructs.get("/", async (req, res) => {
   
     const idProdDelet = req.params.pid;
     console.log(idProdDelet);
-    const busqIdProdDelet = await productList.DeleteProduct(idProdDelet);
+    const busqIdProdDelet = await productList.deleteProduct(idProdDelet);
     if (!busqIdProdDelet) {
       return res.status(404).send({status:"error",message: "Este producto buscado no existe, cargue un nuevo id"});
     }

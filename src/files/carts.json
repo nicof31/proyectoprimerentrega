@@ -7,7 +7,7 @@
 			},
 			{
 				"product": 2,
-				"quantity": 1
+				"quantity": 3
 			}
 		],
 		"id": 1
@@ -85,5 +85,49 @@
 			}
 		],
 		"id": 7
+	},
+	{
+		"products": [
+			{
+				"product": 1,
+				"quantity": 1
+			}
+		],
+		"id": 8
+	},
+	{
+		"products": [
+			{
+				"product": 1,
+				"quantity": 1
+			},
+			{
+				"product": 5,
+				"quantity": 2
+			}
+		],
+		"id": 9
+	},
+	{
+		"products": [
+			{
+				"product": 5,
+				"quantity": 1
+			}
+		],
+		"id": 10
+	},
+	{
+		"products": [
+			{
+				"product": 5,
+				"quantity": 3
+			},
+			{
+				"product": 1,
+				"quantity": 1
+			}
+		],
+		"id": 11
 	}
 ]
