@@ -8,6 +8,7 @@ const routerCarts = Router();
 const cartList = new cartsManager("src/files/carts.json");
 
 //---------------------GET---------------------
+
 routerCarts.get("/api/carts", async (req, res) => {
   const filterLimitCarts = await cartList.carts();
   if (req.query.limit) {
@@ -19,6 +20,19 @@ routerCarts.get("/api/carts", async (req, res) => {
     res.status(200).send({ status: "success", message: { filterLimitCarts } });
   }
 });
+    //Busco por ID
+
+  //http://localhost:8080/products/1
+  routerCarts.get("/api/carts/:pid", async (req, res) => {
+    const idCarts = req.params.pid;
+    console.log(idCarts);
+    const busquedaIdCarts = await cartList.cartById(idCarts);
+    if (!busquedaIdCarts) {
+      return res.status(409).send({status:"error",message: "Este id buscado no existe, cargue un nuevo id"});
+    }
+    return res.status(200).send({status:"success, el id buscado es:",message:{ busquedaIdCarts }});
+  });
+
 
 //---------------------POST ADD CARTS / INCREMENT QUANTITY---------------------
 routerCarts.post("/api/crearcarts/:cid/products/:pid", async (req, res) => {
@@ -92,23 +106,17 @@ routerCarts.post(
       ({ product }) => product == idProductsCartQuan
     );
     if (!searchIdCartQuan) {
-      return res
-        .status(409)
-        .send({
-          status: "error",
-          message:
-            "Este id de carts buscado no existe, cargue un nuevo id carts",
-        });
+      return res.status(409).send({
+        status: "error",
+        message: "Este id de carts buscado no existe, cargue un nuevo id carts",
+      });
     } else {
       if (!quanFilteredProduct) {
         console.log("producto no existe");
-        return res
-          .status(409)
-          .send({
-            status: "error",
-            message:
-              "El prducto buscado no existe, cargue un nuevo id producto",
-          });
+        return res.status(409).send({
+          status: "error",
+          message: "El prducto buscado no existe, cargue un nuevo id producto",
+        });
       } else {
         const quanVerif = 1;
         const verifyQuanProduct = quanFilteredProduct;
@@ -120,21 +128,17 @@ routerCarts.post(
             idProductsCartQuan,
             quantitySearchProduct
           );
-          return res
-            .status(200)
-            .send({
-              status:
-                "success, el id producto en carts existe en base y se puede descontar cantidad",
-              message: {},
-            });
+          return res.status(200).send({
+            status:
+              "success, el id producto en carts existe en base y se puede descontar cantidad",
+            message: {},
+          });
         } else {
-          return res
-            .status(409)
-            .send({
-              status: "error",
-              message:
-                "La cantidad de producto en carrito es = 1, no se puede descontar mas cantidad",
-            });
+          return res.status(409).send({
+            status: "error",
+            message:
+              "La cantidad de producto en carrito es = 1, no se puede descontar mas cantidad",
+          });
         }
       }
     }

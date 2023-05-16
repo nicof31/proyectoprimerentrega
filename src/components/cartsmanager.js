@@ -17,6 +17,15 @@ export default class cartsManager {
     }
   };
 
+      //BUSQUEDA POR ID
+
+  cartById  = async (idCarts) => {
+    const busquedaArrC = await fs.promises.readFile(this.path, "utf-8");
+    const productRtaIdC = JSON.parse(busquedaArrC);
+    const resultBusqC = productRtaIdC .find(({ id }) => id == idCarts);
+    return resultBusqC;
+  };
+
   //--------------------ADD CARTS---------------------
 
   addCarts = async (idCart, idProductAddCart = []) => {
