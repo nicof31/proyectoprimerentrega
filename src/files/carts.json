@@ -15,8 +15,8 @@
 	{
 		"products": [
 			{
-				"product": 1,
-				"quantity": 3
+				"product": 30,
+				"quantity": 1
 			}
 		],
 		"id": 2
@@ -24,122 +24,18 @@
 	{
 		"products": [
 			{
-				"product": 1,
-				"quantity": 1
+				"product": 25,
+				"quantity": 2
+			},
+			{
+				"product": 30,
+				"quantity": 3
+			},
+			{
+				"product": 31,
+				"quantity": 2
 			}
 		],
 		"id": 3
-	},
-	{
-		"products": [
-			{
-				"product": 1,
-				"quantity": 20
-			},
-			{
-				"product": 4,
-				"quantity": 9
-			}
-		],
-		"id": 4
-	},
-	{
-		"products": [
-			{
-				"product": 1,
-				"quantity": 1
-			},
-			{
-				"product": 2,
-				"quantity": 1
-			},
-			{
-				"product": 3,
-				"quantity": 1
-			},
-			{
-				"product": 4,
-				"quantity": 1
-			}
-		],
-		"id": 5
-	},
-	{
-		"products": [
-			{
-				"product": 1,
-				"quantity": 6
-			},
-			{
-				"product": 2,
-				"quantity": 3
-			}
-		],
-		"id": 6
-	},
-	{
-		"products": [
-			{
-				"product": 1,
-				"quantity": 7
-			}
-		],
-		"id": 7
-	},
-	{
-		"products": [
-			{
-				"product": 1,
-				"quantity": 1
-			}
-		],
-		"id": 8
-	},
-	{
-		"products": [
-			{
-				"product": 1,
-				"quantity": 1
-			},
-			{
-				"product": 5,
-				"quantity": 2
-			}
-		],
-		"id": 9
-	},
-	{
-		"products": [
-			{
-				"product": 5,
-				"quantity": 1
-			}
-		],
-		"id": 10
-	},
-	{
-		"products": [
-			{
-				"product": 1,
-				"quantity": 15
-			},
-			{
-				"product": 2,
-				"quantity": 2
-			},
-			{
-				"product": 3,
-				"quantity": 1
-			},
-			{
-				"product": 5,
-				"quantity": 6
-			},
-			{
-				"product": 7,
-				"quantity": 2
-			}
-		],
-		"id": 11
 	}
 ]
