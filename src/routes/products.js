@@ -6,16 +6,17 @@ import { Router } from "express";
 const routerProdructs = Router();
 const productList = new productManager("src/files/products.json");
 
-
+/*
 //http://localhost:8080
 routerProdructs.get("/", async (req, res) => {
     return res.status(200).send(`Gestor de productos`);
   });
-  
+  */
   //ENDPOINTS
    //---------------------GET---------------------
-  
-  routerProdructs.get("/api/products", async (req, res) => {
+  //http://localhost:8080/api/products
+  //http://localhost:8080/api/products/?limit=2
+  routerProdructs.get("", async (req, res) => {
     const filterLimit = await productList.products();    
      if (req.query.limit) {
        const productsFilter = filterLimit.slice(0, req.query.limit);
@@ -26,8 +27,8 @@ routerProdructs.get("/", async (req, res) => {
    });
 
   //filtro de productos por id
-  //http://localhost:8080/products/1
-  routerProdructs.get("/api/products/:pid", async (req, res) => {
+  //http://localhost:8080/api/products/:pid
+  routerProdructs.get("/:pid", async (req, res) => {
     const idProducts = req.params.pid;
     console.log(idProducts);
     const busquedaIdProd = await productList.productById(idProducts);
@@ -38,8 +39,9 @@ routerProdructs.get("/", async (req, res) => {
   });
   
   //---------------------POST---------------------
-  //POST Crear un nuevo producto
-  routerProdructs.post("/api/crearproducto", async (req, res) => {
+  //Crear un nuevo producto
+  //http://localhost:8080/api/products/crearproducto
+  routerProdructs.post("/crearproducto", async (req, res) => {
     const crearProducto = req.body;
     if (!crearProducto.title || !crearProducto.description || !crearProducto.code || !crearProducto.price || !crearProducto.status || !crearProducto.category || !crearProducto.stock) {
       return res.status(400).send({status:"error",message:"Incomplete values"});
@@ -56,8 +58,9 @@ routerProdructs.get("/", async (req, res) => {
   });
   
   //---------------------PUT---------------------
-  //PUT update elementos
-  routerProdructs.put("/api/actulizarproducto/:pid", async (req, res) => {
+  //update elementos
+
+  routerProdructs.put("/actulizarproducto/:pid", async (req, res) => {
     const actualizarProducto = req.body;
     const idUpdate = req.params.pid;
     //console.log(actualizarProducto);
@@ -67,37 +70,42 @@ routerProdructs.get("/", async (req, res) => {
     };
     const findCodeUpC = await productList.products();
     const idFindUpdate = findCodeUpC.find(({ id })=> id == idUpdate);
-    //console.log(JSON.stringify(idfindUpdate));
+    console.log(JSON.stringify(idFindUpdate));
     const filterId = findCodeUpC.filter( id => id !== idFindUpdate);
     const newArrUpId = filterId;
     //console.log("array por id");
     //console.log(newArrUpId);
-    if (idFindUpdate != null) { 
+    if(idFindUpdate == null){
+      console.log("salgo por el if");
+      return res.status(409).send({status:"error",message: "Este id buscado no existe, cargue un nuevo id"});
+    } else {
+      console.log("salgo por else");
       const codDeProdBuscadoId = newArrUpId.find(({ code })=> code === actualizarProducto.code);
-        if (codDeProdBuscadoId !=null){
-        //console.log("el codigo existe cargue uno nuevo")
-        return res.status(409).send({status:"error",message: "El código de producto cargado ya existe en otro producto, cargue un nuevo código"});
-        } else{
-        //console.log("codigo no encontrado, se puede utilizar el que viene en la api");
-      let readThumbnail = JSON.stringify(idFindUpdate.thumbnail);
-      //console.log("read" + readThumbnail)
-      let passThumbnail;
-      if(actualizarProducto.thumbnail != null){
-        passThumbnail = actualizarProducto.thumbnail;
-        //console.log("pass ok" + passThumbnail);
-      } else {
-        passThumbnail = JSON.parse(readThumbnail) ; 
-        //console.log("pass else if" + passThumbnail);
-      };          
-        await productList.updateProduct(idUpdate, actualizarProducto.title, actualizarProducto.description, actualizarProducto.code, actualizarProducto.price, actualizarProducto.status, actualizarProducto.category, passThumbnail ,actualizarProducto.stock);
-        return res.status(200).send({status:"success, Products actualizado en base",message:{ actualizarProducto }}); 
-      };
-    }
-    });
+      if (codDeProdBuscadoId !=null){
+      //console.log("el codigo existe cargue uno nuevo")
+      return res.status(409).send({status:"error",message: "El código de producto cargado ya existe en otro producto, cargue un nuevo código"});
+      } else{
+      //console.log("codigo no encontrado, se puede utilizar el que viene en la api");
+    let readThumbnail = JSON.stringify(idFindUpdate.thumbnail);
+    //console.log("read" + readThumbnail)
+    let passThumbnail;
+    if(actualizarProducto.thumbnail != null){
+      passThumbnail = actualizarProducto.thumbnail;
+      //console.log("pass ok" + passThumbnail);
+    } else {
+      passThumbnail = JSON.parse(readThumbnail) ; 
+      //console.log("pass else if" + passThumbnail);
+    };          
+      await productList.updateProduct(idUpdate, actualizarProducto.title, actualizarProducto.description, actualizarProducto.code, actualizarProducto.price, actualizarProducto.status, actualizarProducto.category, passThumbnail ,actualizarProducto.stock);
+      return res.status(200).send({status:"success, Products actualizado en base",message:{ actualizarProducto }}); 
+    };
+  };
+ 
+});
     
     //---------------------PATCH---------------------
     //PACHT para actualizar valores en particular
-    routerProdructs.patch("/api/actulizarparametro/:pid", async (req, res) => { 
+    routerProdructs.patch("/actulizarparametro/:pid", async (req, res) => { 
       const updateParamPatch = req.body;
       const idUpdatePatch = req.params.pid;
       //console.log(updateParamPatch);
@@ -127,7 +135,7 @@ routerProdructs.get("/", async (req, res) => {
     
   //---------------------DELETE---------------------
   //DELETE  booro elemento
-  routerProdructs.delete("/api/eliminarproducto/:pid", async (req, res) => {
+  routerProdructs.delete("/eliminarproducto/:pid", async (req, res) => {
   
     const idProdDelet = req.params.pid;
     console.log(idProdDelet);

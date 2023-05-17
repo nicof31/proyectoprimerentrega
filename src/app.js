@@ -22,5 +22,5 @@ app.use('/static', express.static('src/public'))
 
 
 //Use Route
-app.use('/', prodRouter);
-app.use('/', cartRouter);
+app.use('/api/products/', prodRouter);
+app.use('/api/carts/', cartRouter);

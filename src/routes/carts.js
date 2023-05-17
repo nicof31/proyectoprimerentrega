@@ -8,8 +8,9 @@ const routerCarts = Router();
 const cartList = new cartsManager("src/files/carts.json");
 
 //---------------------GET---------------------
-
-routerCarts.get("/api/carts", async (req, res) => {
+//http://localhost:8080/api/carts/
+//http://localhost:8080/api/carts/?limit=2
+routerCarts.get("/", async (req, res) => {
   const filterLimitCarts = await cartList.carts();
   if (req.query.limit) {
     const cartsFilter = filterLimitCarts.slice(0, req.query.limit);
@@ -22,8 +23,8 @@ routerCarts.get("/api/carts", async (req, res) => {
 });
     //Busco por ID
 
-  //http://localhost:8080/products/1
-  routerCarts.get("/api/carts/:pid", async (req, res) => {
+  //  http://localhost:8080/api/carts/:pid
+  routerCarts.get("/:pid", async (req, res) => {
     const idCarts = req.params.pid;
     console.log(idCarts);
     const busquedaIdCarts = await cartList.cartById(idCarts);
@@ -35,7 +36,8 @@ routerCarts.get("/api/carts", async (req, res) => {
 
 
 //---------------------POST ADD CARTS / INCREMENT QUANTITY---------------------
-routerCarts.post("/api/crearcarts/:cid/products/:pid", async (req, res) => {
+// http://localhost:8080/api/carts/crearcarts/:cid/products/:pid
+routerCarts.post("/crearcarts/:cid/products/:pid", async (req, res) => {
   const idCart = req.params.cid;
   const idCartEn = Number(req.params.cid);
   const idProductsCart = req.params.pid;
@@ -88,9 +90,9 @@ routerCarts.post("/api/crearcarts/:cid/products/:pid", async (req, res) => {
 });
 
 //---------------------POST DISCONUNT QUANTITY CARTS---------------------
-
+//http://localhost:8080/api/carts/deletequantitycarts/:cid/products/:pid
 routerCarts.post(
-  "/api/deletequantitycarts/:cid/products/:pid",
+  "/deletequantitycarts/:cid/products/:pid",
   async (req, res) => {
     const idCartQuan = req.params.cid;
     const idCartEnQuan = Number(req.params.cid);

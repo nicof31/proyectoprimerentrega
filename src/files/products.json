@@ -431,8 +431,8 @@
 		"id": 31
 	},
 	{
-		"title": "Producto 33",
-		"description": "Repuesto 33",
+		"title": "Producto modificado nico PATCH 2 v4",
+		"description": "modificado nico PATCH 2 v4",
 		"code": "# 33",
 		"price": 1600,
 		"status": true,
