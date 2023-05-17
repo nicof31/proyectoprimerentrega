@@ -11,6 +11,7 @@ export default class cartsManager {
     if (fs.existsSync(this.path)) {
       const dataCart = await fs.promises.readFile(this.path, "utf-8");
       const cartRta = JSON.parse(dataCart);
+
       return cartRta;
     } else {
       return [];
@@ -55,6 +56,8 @@ export default class cartsManager {
           1,
           newQuantityProduct
         );
+        //ordeno por id de producto de menor y mayor dentro del arrays
+        let sortAddIncrCart= verifProductCart.sort((x,y) => x.product - y.product);
         await fs.promises.writeFile(
           this.path,
           JSON.stringify(cartRtaAdd, null, "\t")
@@ -70,12 +73,14 @@ export default class cartsManager {
           };
           resultBusqCartAdd.products.push(productCart);
           JSON.stringify(resultBusqCartAdd);
+          //ordeno por id de producto de menor y mayor dentro del arrays
+          let sortAddIncrCart= verifProductCart.sort((x,y) => x.product - y.product);
           await fs.promises.writeFile(
             this.path,
             JSON.stringify(cartRtaAdd, null, "\t")
           );
-        }
-      }
+        };
+      };
     } else {
       let addCartPrO = [];
       try {

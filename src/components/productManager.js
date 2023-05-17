@@ -5,9 +5,16 @@ export default class productManager {
     this.path = path;
   }
 
-  
-  addProduct = async (title, description, code, price, status, category, thumbnail = [], stock) => {
-    
+  addProduct = async (
+    title,
+    description,
+    code,
+    price,
+    status,
+    category,
+    thumbnail = [],
+    stock
+  ) => {
     let productGest = [];
     try {
       const data = await fs.promises.readFile(this.path, "utf-8");
@@ -21,8 +28,8 @@ export default class productManager {
         code,
         price,
         status,
-        category, 
-        thumbnail,      
+        category,
+        thumbnail,
         stock,
       };
 
@@ -31,13 +38,15 @@ export default class productManager {
         product.id = 1;
       } else {
         product.id = productGest[productGest.length - 1].id + 1;
-      }; 
-    const agregoIdObjP = productGest.push(product);
-    const writeJson = await fs.promises.writeFile(this.path,JSON.stringify(productGest, null, "\t")); 
-    };
-};
+      }
+      const agregoIdObjP = productGest.push(product);
+      const writeJson = await fs.promises.writeFile(
+        this.path,
+        JSON.stringify(productGest, null, "\t")
+      );
+    }
+  };
 
-  
   products = async () => {
     if (fs.existsSync(this.path)) {
       const data = await fs.promises.readFile(this.path, "utf-8");
@@ -52,66 +61,70 @@ export default class productManager {
     const busquedaArr = await fs.promises.readFile(this.path, "utf-8");
     const productRtaId = JSON.parse(busquedaArr);
     const resultBusq = productRtaId.find(({ id }) => id == idParm);
-    return resultBusq; 
+    return resultBusq;
   };
 
   //Update producto completo
-  updateProduct = async (idUpdate,
+  updateProduct = async (
+    idUpdate,
     title,
     description,
     code,
     price,
     status,
-    category, 
-    thumbnail,      
-    stock,
+    category,
+    thumbnail,
+    stock
   ) => {
+    const busquedaArrUpdate = await fs.promises.readFile(this.path, "utf-8");
+    const productRtaUp = JSON.parse(busquedaArrUpdate);
+    const resultBusqUpdate = productRtaUp.find(({ id }) => id == idUpdate);
+    const indiceUpdate = productRtaUp.indexOf(resultBusqUpdate);
+    const productUpdate = {
+      title,
+      description,
+      code,
+      price,
+      status,
+      category,
+      thumbnail,
+      stock,
+      id: resultBusqUpdate.id,
+    };
+    const updateProductoArray = productRtaUp.splice(
+      indiceUpdate,
+      1,
+      productUpdate
+    );
+    const nuevoArrUp = productRtaUp;
+    const writeUpdateP = await fs.promises.writeFile(
+      this.path,
+      JSON.stringify(nuevoArrUp, null, "\t")
+    );
+    return resultBusqUpdate;
+  };
 
-      const busquedaArrUpdate = await fs.promises.readFile(this.path, "utf-8");
-      const productRtaUp = JSON.parse(busquedaArrUpdate);
-      const resultBusqUpdate = productRtaUp.find(({ id }) => id == idUpdate);
-      const indiceUpdate = productRtaUp.indexOf(resultBusqUpdate);
-      const productUpdate = {
-        title,
-        description,
-        code,
-        price,
-        status,
-        category, 
-        thumbnail,      
-        stock,
-        id: resultBusqUpdate.id,
-        };
-      
-      const updateProductoArray = productRtaUp.splice(
-            indiceUpdate,
-            1,
-            productUpdate
-          );
-      const nuevoArrUp = productRtaUp;
-      const writeUpdateP = await fs.promises.writeFile(this.path,JSON.stringify(nuevoArrUp, null, "\t"));
-      return resultBusqUpdate;
- };  
-
-   //Update producto por algun parametros 
- updateParam = async (newParam) => {
-  const busquedaParmUpdate = await fs.promises.readFile(this.path, "utf-8");
-  const productRtaUpParam = JSON.parse(busquedaParmUpdate);
-  const resultBusqUpdateParam = productRtaUpParam.find(({ id }) => id == newParam.id);
-  const indiceUpdateParam = productRtaUpParam.indexOf(resultBusqUpdateParam);
-  const productUpdateParam = newParam;   
-  const updateProductoArrayParam = productRtaUpParam.splice(
-        indiceUpdateParam,
-        1,
-        productUpdateParam
-      );
-  const nuevoArrUpParam = productRtaUpParam;
-  await fs.promises.writeFile(
-        this.path,
-        JSON.stringify(nuevoArrUpParam, null, "\t")
-      );
-      return resultBusqUpdateParam;
-    };  
+  //Update producto por algun parametros
+  updateParam = async (newParam) => {
+    const busquedaParmUpdate = await fs.promises.readFile(this.path, "utf-8");
+    const productRtaUpParam = JSON.parse(busquedaParmUpdate);
+    const resultBusqUpdateParam = productRtaUpParam.find(
+      ({ id }) => id == newParam.id
+    );
+    const indiceUpdateParam = productRtaUpParam.indexOf(resultBusqUpdateParam);
+    const productUpdateParam = newParam;
+    const updateProductoArrayParam = productRtaUpParam.splice(
+      indiceUpdateParam,
+      1,
+      productUpdateParam
+    );
+    const nuevoArrUpParam = productRtaUpParam;
+    await fs.promises.writeFile(
+      this.path,
+      JSON.stringify(nuevoArrUpParam, null, "\t")
+    );
+    return resultBusqUpdateParam;
+  };
 
   deleteProduct = async (idDelete) => {
     const busquedaRtaDelete = await fs.promises.readFile(this.path, "utf-8");
@@ -120,10 +133,10 @@ export default class productManager {
     const indiceDelete = productRtaDelete.indexOf(resultBusqDelete);
     const eliminarObjetoIndice = productRtaDelete.splice(indiceDelete, 1);
     const nuevoArreglo = productRtaDelete;
-    const deletBase =  await fs.promises.writeFile(
-        this.path,
-        JSON.stringify(nuevoArreglo, null, "\t")
-      );
-      return resultBusqDelete;
-    };
+    const deletBase = await fs.promises.writeFile(
+      this.path,
+      JSON.stringify(nuevoArreglo, null, "\t")
+    );
+    return resultBusqDelete;
+  };
 }

@@ -120,12 +120,24 @@
 	{
 		"products": [
 			{
-				"product": 5,
-				"quantity": 3
+				"product": 1,
+				"quantity": 15
 			},
 			{
-				"product": 1,
+				"product": 2,
+				"quantity": 2
+			},
+			{
+				"product": 3,
 				"quantity": 1
+			},
+			{
+				"product": 5,
+				"quantity": 6
+			},
+			{
+				"product": 7,
+				"quantity": 2
 			}
 		],
 		"id": 11
