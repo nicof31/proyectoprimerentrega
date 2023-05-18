@@ -139,10 +139,11 @@ routerProdructs.get("/", async (req, res) => {
   
     const idProdDelet = req.params.pid;
     console.log(idProdDelet);
-    const busqIdProdDelet = await productList.deleteProduct(idProdDelet);
+    
     if (!busqIdProdDelet) {
       return res.status(404).send({status:"error",message: "Este producto buscado no existe, cargue un nuevo id"});
     }
+    const busqIdProdDelet = await productList.deleteProduct(idProdDelet);
     return res.status(200).send({status:"success, el producto eliminado es:", message:{ busqIdProdDelet }});
   });
 
