@@ -418,27 +418,5 @@
 		],
 		"stock": 445,
 		"id": 30
-	},
-	{
-		"title": "Producto 31",
-		"description": "Repuesto 32",
-		"code": "# 31",
-		"price": 1600,
-		"status": true,
-		"category": "Herramienta 32",
-		"thumbnail": [],
-		"stock": 460,
-		"id": 31
-	},
-	{
-		"title": "Producto modificado nico PATCH 2 v4",
-		"description": "modificado nico PATCH 2 v4",
-		"code": "# 33",
-		"price": 1600,
-		"status": true,
-		"category": "Herramienta 33",
-		"thumbnail": [],
-		"stock": 460,
-		"id": 32
 	}
 ]

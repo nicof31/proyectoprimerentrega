@@ -136,15 +136,13 @@ routerProdructs.get("/", async (req, res) => {
   //---------------------DELETE---------------------
   //DELETE  booro elemento
   routerProdructs.delete("/eliminarproducto/:pid", async (req, res) => {
-  
     const idProdDelet = req.params.pid;
-    console.log(idProdDelet);
-    
-    if (!busqIdProdDelet) {
+    const findCodeDelete = await productList.products();
+    const idVerfDelete= findCodeDelete .find(({ id })=> id == idProdDelet);
+    if (idVerfDelete == null) {
       return res.status(404).send({status:"error",message: "Este producto buscado no existe, cargue un nuevo id"});
     }
     const busqIdProdDelet = await productList.deleteProduct(idProdDelet);
     return res.status(200).send({status:"success, el producto eliminado es:", message:{ busqIdProdDelet }});
   });
-
   export default routerProdructs;
