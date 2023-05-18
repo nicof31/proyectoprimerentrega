@@ -26,7 +26,6 @@ routerCarts.get("/", async (req, res) => {
   //  http://localhost:8080/api/carts/:pid
   routerCarts.get("/:pid", async (req, res) => {
     const idCarts = req.params.pid;
-    console.log(idCarts);
     const busquedaIdCarts = await cartList.cartById(idCarts);
     if (!busquedaIdCarts) {
       return res.status(404).send({status:"error",message: "El id de carrito buscado no existe, cargue un nuevo id"});
@@ -61,18 +60,12 @@ routerCarts.post("/crearcarts/:cid/products/:pid", async (req, res) => {
     if (idCartEn > 0) {
       if (!searchIdCart) {
         const product = idFindCartProduct.id;
-
-        console.log("salog por add");
         await cartList.addCarts(idCart, product);
         return res
           .status(200)
           .send({ status: "success, Carts created", message: {} });
       } else {
-        console.log("salog por addUP");
-        console.log("search" + JSON.stringify(searchIdCart));
-        console.log(idCart);
         let idProductAddCart = idFindCartProduct.id;
-
         await cartList.addCarts(idCart, idProductAddCart);
         return res.status(200).send({
           status:
@@ -111,7 +104,6 @@ routerCarts.post(
       return res.status(404).send({status:"error",message: "El id de carrito buscado no existe, cargue un nuevo id"});
     } else {
       if (!quanFilteredProduct) {
-        console.log("producto no existe");
         return res.status(404).send({status:"error",message: "El id de carrito buscado no existe, cargue un nuevo id"});
       } else {
         const quanVerif = 1;
